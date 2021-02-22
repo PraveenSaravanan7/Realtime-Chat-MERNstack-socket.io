@@ -97,5 +97,19 @@ router.route('/login')
     
 });
 
+router.route('/:id') 
+.get(authJWT,(req,res,next) => {
+  const uid= req.params.id;
+
+    Users.find({_id:uid},{password:0})
+    .then((users) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(users);
+    }, (err) => next(err))
+    .catch((err) => next(err));
+ 
+});
+
 
 module.exports = router;

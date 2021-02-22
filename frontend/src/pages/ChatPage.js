@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min'
 import io from "socket.io-client";
+import axios from '../api'
+import { ChatmsgList} from "../components/ChatmsgList";
 const ls = require("local-storage")
 
 const ENDPOINT = 'http://localhost:3000';
@@ -23,6 +25,7 @@ export const ChatPage = () => {
     return y+x
   }
   useEffect(() => {    
+    
     let name=uid
     let room= roomname(uid, ls('user_id'))
     var connectionOptions =  {
@@ -33,8 +36,6 @@ export const ChatPage = () => {
   };
 
     socket = io.connect(ENDPOINT,connectionOptions);
-
-    //socket = io(ENDPOINT);
 
     setRoom(room);
     setName(name)
@@ -71,33 +72,63 @@ useEffect(()=>{
       socket.emit('sendMessage', message, () => setMessage(''));
     }
   }
-
+  var [usertwo,setUser_two]=useState([])
+  var [loading,setloading]=useState(true); 
+  var [err,seterr]=useState(false); 
+  async function getUser(id) {
+      //console.log(formData)
+      setloading(true)
+      seterr(false)
+      try {           
+          let  url="/users/"+id
+        const response = await axios.get(url);  
+        setloading(false)       
+        if(response.data){
+         console.log(response.data)
+          return response.data
+        }
+        
+      } catch (error) {
+        seterr(error);
+       // setloading(false)
+      }
+    }
+  
+  useEffect(() => {
+      getUser(uid).then(data=>{
+          setUser_two(data[0])
+      })
+  }, []) 
 
   return (
     <div className="container pt-5" >
     <div className="jumbotron p-4 border bg-white col-md-6 m-auto" >
  
-      <h5> {room} </h5>
-    <div>
+      <h5> {usertwo.email} </h5>
+
+      <ChatmsgList msg={messages} ></ChatmsgList>
+      
     <form className="form">
+    <div className="row" >
+    <div className="col-8" >
     <input
-      className="input"
+      className="input form-control"
       type="text"
       placeholder="Type a message..."
       value={message}
       onChange={({ target: { value } }) => setMessage(value)}
       onKeyPress={event => event.key === 'Enter' ? sendMessage(event) : null}
     />
-    <button className="sendButton" onClick={e => sendMessage(e)}>Send</button>
+    </div>
+    <div className="col-4" >
+    <button className="btn btn-primary sendButton" onClick={e => sendMessage(e)}>Send</button>
+    </div>
+    </div>
   </form>
 
-    <h3> {messages.length} </h3>
-
-      
-
+  
     </div>
 
-    </div>
     </div>
   )
 }
