@@ -5,12 +5,11 @@ export const ChatmsgList = (props) => {
     return (
         <>
         {props.msg.map((m)=>
-        
-        <div className="border-bottom mb-2" >
-                <span> {m.user!=ls('user_id')? <>YOU:</>:<>Him:</> } </span>
-               <span><b>{m.text}</b></span>
+    
+        <div className={m.user!=ls('user_id')? "d-flex justify-content-end": "d-flex justify-content-start"} >
+            
+               <div className={m.user!=ls('user_id')?"msg-box":"msg-box2"} ><p className="m-0" > {m.text} </p></div>
        </div>
-        
         )}
 
         </>

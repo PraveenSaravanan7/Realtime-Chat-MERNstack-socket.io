@@ -74,9 +74,9 @@ export const LoginPage = () => {
     window.location.href="/"
  }
     return (
-      <div className="container pt-5" >
-      <div className="jumbotron border bg-white col-md-5 m-auto pt-5" >
-         <h1 className="text-primary mb-3" ><b>CHAT systeM</b></h1>
+      <div >
+      <div className="jumbotron bg-white col-md-5 col-lg-3 m-auto pt-4" >
+         <h1 className="text-dark mb-4" ><b>Chat System</b></h1>
            
              <div className=" p-1 " >
                
@@ -87,39 +87,39 @@ export const LoginPage = () => {
       {tab?
             <form className="mt-4 px-2" onSubmit={(event) => handleSignup(event)}>
         <div className="form-group ">
-<span ><b>Name</b></span>
+<span >Name</span>
     <input type="text" className="form-control" required  name="name"  onChange={handleChange}/>
   </div>
 <div className="form-group ">
-<span><b>Email</b></span>
+<span>Email</span>
     <input type="email" className="form-control" required  name="email"  onChange={handleChange}/>
   </div>
   <div className="form-group">
-    <span  ><b>New Password</b></span>
+    <span>New Password</span>
     <input type="password" className="form-control" required name="password" onChange={handleChange}/>
   </div>
  
   {err &&
   <span className="text-danger font-weight-bold">Email already exists try to log in. <br/></span>
 }
-  <button type="submit" className="mt-2 btn  btn-dark">
+  <button type="submit" className="mt-4 btn btn-block btn-primary">
   {loading? <>Loading...</>:<>Submit</> } 
   </button>
 </form>
       :  
 <form className="mt-4 px-2" onSubmit={(event) => handleLogin(event)}>      
 <div className="form-group ">
-<span><b>Email</b></span>
+<span>Email</span>
   <input type="email" className="form-control" required  name="email"  onChange={handleChange}/>
 </div>
 <div className="form-group">
-  <span  ><b>Password</b></span>
+  <span>Password</span>
   <input type="password" className="form-control" required name="password" onChange={handleChange}/>
 </div>
 {err &&
 <span className="text-danger font-weight-bold">Incorrect Email or Password. <br/></span>
 }
-<button type="submit" className="mt-2 btn  btn-dark">
+<button type="submit" className="mt-4 btn btn-block btn-primary">
 {loading? <>Loading...</>:<>Submit</> } 
 </button>
 </form>

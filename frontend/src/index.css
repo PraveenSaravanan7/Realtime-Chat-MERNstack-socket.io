@@ -1,12 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+
 body {
   margin: 0;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400 !important;
   /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
     font-family: 'Viga', sans-serif;
     */
     /* font-family: 'Quicksand', sans-serif; */
-    font-family: 'Roboto', sans-serif !important;
+    /* font-family: 'Roboto', sans-serif !important; */
     /* font-family: 'Rubik', sans-serif; */
 
   -webkit-font-smoothing: antialiased;
@@ -28,12 +32,11 @@ h1, h2, h3, h4, h5, h6{
   font-weight: bolder !important;
   color: black;
 }
-
 .form-control{
   border-radius: 0 !important;
   outline: 0 !important;
   border: 0 !important;
-  border-bottom: 3px solid #007bff !important;
+  border-bottom: 2.4px solid #007bff !important;
   font-weight: bold !important;
 }
 .form-control:focus{
@@ -45,7 +48,7 @@ h1, h2, h3, h4, h5, h6{
  -webkit-transition: none !important;
 }
 .btn{
-  border-radius: 100px;
+  border-radius: 10px;
   font-weight: bold;
   border-width: 0.15em;
 }
@@ -181,4 +184,80 @@ a{
   height: auto;
   border-radius: 10px;
   max-height: 200px;
+}
+.form-group > span{
+  color: grey;
+  font-size: 15px;
+  font-weight: 500;
+}
+.user-pic{
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+}
+.user-pic2{
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+}
+a:-webkit-any-link {
+  text-decoration-line: none !important;
+}
+.main-chat-div{
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  /* border: 1px solid black; */
+}
+.nav-bottom-new{
+  padding-bottom: 10px;
+  padding-top: 5px;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  background-color: white;
+  /* border: 1px solid black; */
+  width: 100%;
+  z-index: 99;
+}
+.nav-top-new{
+  padding-bottom: 0px;
+  padding-top: 5px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: white;
+  /* border: 1px solid black; */
+  width: 100%;
+  z-index: 99;
+}
+.msg-box{
+  color: white;
+  background-color: #f8004abe;
+  border-radius: 15px;
+  padding: 8px;
+  display: inline-block;
+  max-width: 50%;
+  margin-bottom: 8px;
+}
+.msg-box2{
+  color: white;
+  background-color: #6c00f8be;
+  border-radius: 15px;
+  padding: 8px;
+  display: inline-block;
+  max-width: 50%;
+  margin-bottom: 8px;
+}
+.msg-list-box{
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow-x: auto;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  padding-left: 20px;
+  padding-right: 20px;
+  max-height: 100vh;
 }

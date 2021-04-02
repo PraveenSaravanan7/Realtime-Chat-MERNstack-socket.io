@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import axios from "../api"
+import { UsersList } from "../components/UsersList";
 const ls=require("local-storage")
 export const HomePage = () => {
     var [user,setUser]=useState([null])
     var [loading,setloading]=useState(true); 
     var [err,seterr]=useState(false); 
+    var [users,setUsers]=useState([])
     async function getUser() {
-        //console.log(formData)
         setloading(true)
         seterr(false)
         try {           
@@ -21,7 +22,21 @@ export const HomePage = () => {
           
         } catch (error) {
           seterr(error);
-         // setloading(false)
+        }
+      }
+
+      async function getUsers() {
+        seterr(false)
+        try {           
+            let  url="/users/allusers"
+          const response = await axios.get(url);      
+          if(response.data){
+           console.log(response.data)
+            return response.data
+          }
+          
+        } catch (error) {
+          seterr(error);
         }
       }
     
@@ -29,22 +44,28 @@ export const HomePage = () => {
         getUser().then(data=>{
             setUser(data)
         })
+        getUsers().then(data=>{
+            setUsers(data)
+        })
     }, [])
     return (
-        <div className="container pt-5" >
-            <div className="jumbotron p-4 border bg-white col-md-6 m-auto" >
-            <h1 className="text-primary mb-3" ><b>CHAT systeM</b></h1>
+        <div >
+        <div className="bg-white col-md-4  m-auto pt-4" >
+           <h1 className="text-dark mb-4" ><b>Chat System</b></h1>
            
                 {!loading?
                 <div>
-                    <h2>{user.name}</h2>
-                    <h6>{user.email}</h6>
-                    
-                   <Link to={'/users'} >
-                   <button className="btn btn-lg btn-light shadow-sm btn-block mt-4" >Go to chat</button>
-                    </Link>
+                    <h4 className="mb-3 text-primary" >Welcome {user.name} 👋</h4>
+                  
+                  {users.length ?  <UsersList users={users} ></UsersList>: null}
+           
                 </div>:
-                <h3 className="text-primary" >Loading....</h3>}
+                <div class="container">
+                <div class="row justify-content-center">
+                <div class="col-auto">
+                    <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+              </div></div> </div></div> }
             </div>
         </div>
     )
